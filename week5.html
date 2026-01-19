@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NPTEL Practice Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #3a0ca3, black);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .quiz-container {
+      width: 100%;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .question {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .answers label {
+      display: block;
+      font-size: 1.1rem;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 8px 0;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .answers input[type="radio"] {
+      display: none; /* Hide the default radio button */
+    }
+
+    .answers label:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    label.correct {
+      background-color: #4CAF50 !important;
+      color: white;
+    }
+
+    label.wrong {
+      background-color: #f44336 !important;
+      color: white;
+    }
+
+    label.disabled {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .navigation-btns {
+      display: flex;
+      justify-content: space-between; /* Space the buttons to the left and right */
+      margin-top: 20px;
+    }
+
+    .navigation-btns button {
+      padding: 10px 20px;
+      background: white;
+      color: black;
+      border: none;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .navigation-btns button:hover {
+      background-color: #ddd;
+    }
+
+    .score {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #00ffcc;
+    }
+
+    /* Background Particles Layer */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 0px;
+      font-size: 1rem;
+      color: #e0aaff;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      color: #f15bb5;
+    }
+    .logo {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #c77dff;
+      margin-bottom: 50px;
+      margin-left: 50px;
+    }
+
+  </style>
+</head>
+<body>
+    <div class="logo">QuizSphere</div>
+<div id="particles-js"></div>
+<h1>Forest And Their Management Quiz</h1>
+<h1>Week-5</h1><br>
+<div class="quiz-container">
+ 
+  <div class="question" id="question-text"></div>
+  <div class="answers" id="answer-options"></div>
+  <div class="navigation-btns">
+    <button id="prev-btn" onclick="previousQuestion()">Previous</button>
+    <button id="next-btn" onclick="nextQuestion()" style="display: none;">Next</button>
+    <button id="submit-btn" onclick="submitQuiz()" style="display: none;">Submit</button>
+  </div>
+  <div class="score" id="score-container"></div>
+  <a href="index.html" class="back-link">Back to Homepage</a><br>
+  <a href="practice.html" class="back-link">Back to Week Selection</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 80 },
+      size: { value: 2 },
+      color: { value: "#ffffff" },
+      line_linked: {
+        enable: true,
+        distance: 130,
+        color: "#ffffff",
+        opacity: 0.3,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: 1.5
+      }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: { enable: true, mode: "grab" }
+      }
+    }
+  });
+
+  const questions = [
+  {
+    question: "This sampling employs a simple rule of selecting every kth unit starting with a number chosen at random from 1 to k as the random start. We're talking about",
+    answers: ["Simple random sampling", "Systematic sampling", "Stratified sampling", "Multistage sampling"],
+    correctAnswer: "Systematic sampling"
+  },
+  {
+    question: "IMU stands for",
+    answers: ["Imperial metering unit", "Inertial metering unit", "Imperial measurement unit", "Inertial measurement unit"],
+    correctAnswer: "Inertial measurement unit"
+  },
+  {
+    question: "___ is how close the measured values are to the correct value.",
+    answers: ["Accuracy", "Precision", "Bias", "Variance"],
+    correctAnswer: "Accuracy"
+  },
+  {
+    question: "A list of sampling units is called a",
+    answers: ["frame", "window", "sample", "population"],
+    correctAnswer: "frame"
+  },
+  {
+    question: "The time of flight for LiDAR is 0.00001 sec. Find the distance of the object from the instrument.",
+    answers: ["500 m", "1000 m", "1500 m", "2000 m"],
+    correctAnswer: "1500 m"
+  },
+  {
+    question: "Which of these is correct?",
+    answers: [
+      "Plane surveying takes into account the true shape of the Earth and is used for smaller areas (< 250 sq km)",
+      "Plane surveying takes into account the true shape of the Earth and is used for larger areas (> 250 sq km)",
+      "Geodetic surveying takes into account the true shape of the Earth and is used for smaller areas (< 250 sq km)",
+      "Geodetic surveying takes into account the true shape of the Earth and is used for larger areas (> 250 sq km)"
+    ],
+    correctAnswer: "Geodetic surveying takes into account the true shape of the Earth and is used for larger areas (> 250 sq km)"
+  },
+  {
+    question: "A sampling procedure such that each possible combination of sampling units out of the population has the same chance of being selected is referred to as",
+    answers: ["Simple random sampling", "Systematic sampling", "Stratified sampling", "Multistage sampling"],
+    correctAnswer: "Simple random sampling"
+  },
+  {
+    question: "The frequency of flyovers is an indicator of",
+    answers: ["spatial resolution", "temporal resolution", "spectral resolution","radiometric resolution"],
+    correctAnswer: "temporal resolution"
+  },
+  {
+    question: "___ is how close the measured values are to each other.",
+    answers: ["Accuracy", "Precision", "Bias", "Variance"],
+    correctAnswer: "Precision"
+  },
+  {
+    question: "Bathymetric LiDAR uses",
+    answers: ["far infrared light", "near infrared light", "Orange light", "green light"],
+    correctAnswer: "green light"
+  }
+];
+
+
+
+
+  let currentQuestionIndex = 0;
+  const selectedAnswers = new Array(questions.length).fill(null);
+
+  // Helper function to get URL parameters
+  function getUrlParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+
+  // Get the randomization settings from URL
+  const randomizeQuestions = getUrlParameter('randomizeQuestions') === 'yes';
+  const randomizeAnswers = getUrlParameter('randomizeAnswers') === 'yes';
+
+  // Randomize questions if needed
+  if (randomizeQuestions) {
+    questions.sort(() => Math.random() - 0.5);
+  }
+
+  // Shuffle answers for each question if needed
+  function shuffleAnswers(answers) {
+    for (let i = answers.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [answers[i], answers[j]] = [answers[j], answers[i]]; // Swap elements
+    }
+  }
+
+  function loadQuestion() {
+    const question = questions[currentQuestionIndex];
+    const questionText = document.getElementById("question-text");
+    const answerOptions = document.getElementById("answer-options");
+
+    questionText.textContent = `${currentQuestionIndex + 1}. ${question.question}`;
+    answerOptions.innerHTML = "";
+
+    const shuffledAnswers = [...question.answers];
+    if (randomizeAnswers) {
+      shuffleAnswers(shuffledAnswers); // Shuffle answers if URL param is set
+    }
+
+    shuffledAnswers.forEach(answer => {
+      const label = document.createElement("label");
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "answer";
+      input.value = answer;
+
+      if (selectedAnswers[currentQuestionIndex] === answer) {
+        input.checked = true;
+      }
+
+      input.addEventListener("change", () => {
+        selectedAnswers[currentQuestionIndex] = answer;
+
+        const labels = document.querySelectorAll("#answer-options label");
+        labels.forEach(lbl => {
+          lbl.classList.remove("correct", "wrong", "disabled");
+          const inp = lbl.querySelector("input");
+          if (inp.value === question.correctAnswer) {
+            lbl.classList.add("correct");
+          } else if (inp.checked) {
+            lbl.classList.add("wrong");
+          }
+          lbl.classList.add("disabled");
+          inp.disabled = true;
+        });
+
+        // If it's the last question, show the submit button
+        if (currentQuestionIndex === questions.length - 1) {
+          document.getElementById("submit-btn").style.display = "inline-block";
+        } else {
+          // Move to next question after a 0.3 second delay
+          setTimeout(() => {
+            nextQuestion();
+          }, 800);
+        }
+      });
+
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(" " + answer));
+      answerOptions.appendChild(label);
+    });
+
+    document.getElementById("prev-btn").style.display = currentQuestionIndex === 0 ? "none" : "inline-block";
+    document.getElementById("next-btn").style.display = currentQuestionIndex === questions.length - 1 ? "none" : "inline-block";
+  }
+
+  function nextQuestion() {
+    if (currentQuestionIndex < questions.length - 1) {
+      currentQuestionIndex++;
+      loadQuestion();
+    }
+  }
+
+  function previousQuestion() {
+    if (currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      loadQuestion();
+    }
+  }
+
+  function submitQuiz() {
+  let score = 0;
+  const totalQuestions = questions.length;
+
+  questions.forEach((q, i) => {
+    if (selectedAnswers[i] === q.correctAnswer) score++;
+  });
+
+  window.location.href = `score.html?score=${score}&totalQuestions=${totalQuestions}`;
+}
+
+  loadQuestion();
+</script>
+</body>
+</html>

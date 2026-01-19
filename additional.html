@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Questions and Answers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #3a0ca3, black);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      padding: 20px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .questions-container {
+      width: 100%;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      position: relative;
+      z-index: 2;
+      animation: scaleIn 0.6s ease-in-out;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      animation: slideUp 0.7s ease-out;
+    }
+
+    .question {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .answer {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #00ffcc;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      animation: fadeInUp 1.2s ease-out;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.8);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #c77dff;
+      margin-bottom: 50px;
+      margin-left: 50px;
+    }
+
+    #tsparticles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      top: 0;
+      left: 0;
+    }
+    .back-link {
+      display: block;
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #e0aaff;
+      text-decoration: none;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .back-link:hover {
+      color: #f15bb5;
+      text-shadow: 0 0 10px #f15bb5, 0 0 20px #f15bb5, 0 0 30px #f15bb5;
+    }
+    #desc{
+        font-size: larger;
+        color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">QuizSphere</div>
+
+  <div class="questions-container">
+    <h1>Additional Questions and Answers<p id="desc">(Updated)</p></h1>
+
+    <div class="question">
+      <p>1. When are seed trees felled?</p>
+      <p class="answer">✔️ Answer: In the final or removal felling stage/ after successful natural regeneration.</p>
+      <p class="description">Description: Seed trees are felled after the successful natural regeneration of the forest to ensure the new generation of trees can thrive.</p>
+  </div>
+  
+  <div class="question">
+      <p>2. What is the branch of forestry dealing with harvesting, disposal, and use of forest produce?</p>
+      <p class="answer">✔️ Answer: Forest Utilization.</p>
+      <p class="description">Description: Forest Utilization focuses on the sustainable harvesting and use of forest resources, including timber and non-timber products.</p>
+  </div>
+  
+  <div class="question">
+      <p>3. What are the aims of forest management?</p>
+      <p class="answer">✔️ Answer: All of the above (Water reservation, soil preservation, species preservation).</p>
+      <p class="description">Description: Forest management aims to maintain a balance of ecosystem functions like water preservation, soil health, and species conservation.</p>
+  </div>
+  
+  <div class="question">
+      <p>4. When is a stand considered uneven-aged?</p>
+      <p class="answer">✔️ Answer: When the age difference between trees is >20% of the desired rotation age.</p>
+      <p class="description">Description: A stand is uneven-aged when there is a significant variation in tree ages, greater than 20% of the desired rotation age.</p>
+  </div>
+  
+  <div class="question">
+      <p>5. What is the value derived from knowing others are using the resource in this generation?</p>
+      <p class="answer">✔️ Answer: Altruistic Value.</p>
+      <p class="description">Description: Altruistic value refers to the benefit derived from knowing that resources are being used responsibly for the greater good.</p>
+  </div>
+  
+  <div class="question">
+      <p>6. What is the process of clearing old crops in a single felling called?</p>
+      <p class="answer">✔️ Answer: Clear Cutting.</p>
+      <p class="description">Description: Clear cutting is the practice of removing all trees in a particular area in a single operation, often to regenerate a new crop.</p>
+  </div>
+  
+  <div class="question">
+      <p>7. In even-aged stands, how much can tree ages vary?</p>
+      <p class="answer">✔️ Answer: Less than 20 years.</p>
+      <p class="description">Description: In even-aged stands, trees are managed so that their ages don't vary more than 20 years, maintaining uniformity in growth.</p>
+  </div>
+  
+  <div class="question">
+      <p>8. According to plants, what kind of element is Chlorine?</p>
+      <p class="answer">✔️ Answer: Micronutrient.</p>
+      <p class="description">Description: Chlorine is classified as a micronutrient in plants, which is necessary in small quantities for their growth and development.</p>
+  </div>
+  
+  <div class="question">
+      <p>9. Number-diameter curve for selection is usually shaped as:</p>
+      <p class="answer">✔️ Answer: Inverse J-shaped.</p>
+      <p class="description">Description: The inverse J-shaped curve represents a typical distribution of tree diameters in an uneven-aged forest, where smaller trees dominate.</p>
+  </div>
+  
+  <div class="question">
+      <p>10. Objectives of Forest Management include:</p>
+      <p class="answer">✔️ Answer: All of the above.</p>
+      <p class="description">Description: Forest management encompasses multiple objectives, including conservation of water, soil, and species, as well as ensuring sustainable resource use.</p>
+  </div>
+  
+  <div class="question">
+      <p>11. Seed trees are removed during:</p>
+      <p class="answer">✔️ Answer: Final felling.</p>
+      <p class="description">Description: Seed trees are typically removed in the final felling phase, allowing natural regeneration to establish.</p>
+  </div>
+  
+  <div class="question">
+      <p>12. Characteristics of climax vegetation include:</p>
+      <p class="answer">✔️ Answer: All of the above.</p>
+      <p class="description">Description: Climax vegetation represents a stable ecosystem in its final, mature state, characterized by specific plant species that have adapted to the local environment.</p>
+  </div>
+  
+  <div class="question">
+      <p>13. Chestnut grows in what type of forest?</p>
+      <p class="answer">✔️ Answer: Dry and deciduous.</p>
+      <p class="description">Description: Chestnut trees thrive in dry, deciduous forests where the climate is suitable for their growth.</p>
+  </div>
+  
+  <div class="question">
+      <p>14. Who proposed the grouping system for forest types?</p>
+      <p class="answer">✔️ Answer: Gayer.</p>
+      <p class="description">Description: The grouping system for forest types was proposed by Gayer, providing a classification for different forest ecosystems.</p>
+  </div>
+  
+  <div class="question">
+      <p>15. A pine tree produces fruits for animals — this species is:</p>
+      <p class="answer">✔️ Answer: Keystone species.</p>
+      <p class="description">Description: A keystone species plays a crucial role in maintaining the structure and functioning of its ecosystem, such as providing food or habitat for other species.</p>
+  </div>
+  
+  <div class="question">
+      <p>16. Mangrove trees are found in which type of forest?</p>
+      <p class="answer">✔️ Answer: Swampy forest.</p>
+      <p class="description">Description: Mangrove trees thrive in coastal, swampy forests, providing vital habitat for wildlife and protecting shorelines from erosion.</p>
+  </div>
+  
+  <div class="question">
+      <p>17. Soil quality and formation depends upon what conditions?</p>
+      <p class="answer">✔️ Answer: Climate, parent material, topography, biological activity, and time.</p>
+      <p class="description">Description: The formation and quality of soil are influenced by various factors, including climate, parent material, and biological processes.</p>
+  </div>
+  
+  <div class="question">
+      <p>18. Chestnut species belong to which forest type?</p>
+      <p class="answer">✔️ Answer: Temperate deciduous forest. or Moist decidious forest.</p>
+      <p class="description">Description: Chestnut trees are commonly found in temperate deciduous forests, which experience four distinct seasons and have rich biodiversity.</p>
+  </div>
+  
+  <div class="question">
+      <p>19. Which tree does not perform biological nitrogen fixation?</p>
+      <p class="answer">✔️ Answer: Chestnut.</p>
+      <p class="description">Description: Chestnut trees do not have the ability to fix nitrogen biologically, unlike certain legumes.</p>
+  </div>
+  
+  <div class="question">
+      <p>20. What is the standard breast height (DBH) used for tree measurement in Tokyo, Korea, and globally?</p>
+      <p class="answer">✔️ Answer: 1.3 meters (130 cm).</p>
+      <p class="description">Description: DBH (Diameter at Breast Height) is typically measured at 1.3 meters from the ground in many countries for consistency in tree measurements.</p>
+  </div>
+  
+  <div class="question">
+      <p>21. Firewood is considered as:</p>
+      <p class="answer">✔️ Answer: Direct and consumptive use.</p>
+      <p class="description">Description: Firewood is a consumptive resource, used directly by humans for heating and cooking purposes.</p>
+  </div>
+  
+  <div class="question">
+      <p>22. Who introduced the group selection system in forestry?</p>
+      <p class="answer">✔️ Answer: Karl Gayer.</p>
+      <p class="description">Description: Karl Gayer introduced the group selection system in forestry, which involves harvesting trees in small groups to promote regeneration.</p>
+  </div>
+  
+  <div class="question">
+      <p>23. What is the rotation period for PB-II category forests?</p>
+      <p class="answer">✔️ Answer: 60–90 years.</p>
+      <p class="description">Description: The rotation period for PB-II category forests typically ranges from 60 to 90 years, depending on the type of trees and forest management practices.</p>
+  </div>
+  
+  <div class="question">
+      <p>24. In uneven-aged forests, what should be the maximum percentage of trees in each age class?</p>
+      <p class="answer">✔️ Answer: Less than 20%.</p>
+      <p class="description">Description: In uneven-aged forests, the number of trees in each age class should be well balanced, with no class exceeding 20% of the total.</p>
+  </div>
+  
+  <div class="question">
+      <p>25. The 'inverse J' diameter distribution curve is used in which forest type?</p>
+      <p class="answer">✔️ Answer: Uneven-aged forest.</p>
+      <p class="description">Description: The inverse J curve reflects a healthy distribution of tree sizes in uneven-aged forests, where many small trees exist and fewer large trees.</p>
+  </div>
+  
+  <div class="question">
+      <p>26. What type of ecosystem is most likely to have a high rate of nitrogen fixation?</p>
+      <p class="answer">✔️ Answer: Tropical Rainforests.</p>
+      <p class="description">Description: Tropical rainforests, due to their biodiversity and abundance of nitrogen-fixing species, often have a high rate of nitrogen fixation.</p>
+  </div>
+  
+  <div class="question"> 
+    <p>27. Tending is done on?</p>
+    <p class="answer">✔️ Answer: A and B (Crop and Other competing vegetation)</p>
+    <p class="description">Description: Tending involves various silvicultural operations aimed at improving the growth of young forest crops by removing or controlling competing vegetation and providing necessary care to the crops.</p>
+</div>
+
+  
+  <div class="question">
+      <p>28. Catchment areas are best suited for:</p>
+      <p class="answer">✔️ Answer: Selection system.</p>
+      <p class="description">Description: The uniform shelterwood system is ideal for catchment areas, where the objective is to maintain a consistent canopy cover while regenerating the forest.</p>
+  </div>
+  
+  <div class="question">
+      <p>29. Choice of spacing is dependent upon:</p>
+      <p class="answer">✔️ Answer: All of these (Objective of plantation, Site-specific matching, Growth rate).</p>
+      <p class="description">Description: Spacing in plantations is determined by several factors, including the plantation's objective, the site conditions, and the growth rate of the trees.</p>
+  </div>
+  
+  <div class="question">
+      <p>30. The fig tree would be a good example of:</p>
+      <p class="answer">✔️ Answer: Keystone species.</p>
+      <p class="description">Description: The fig tree is a keystone species, providing essential food and habitat for a variety of animals in its ecosystem.</p>
+  </div>
+  
+<div class="question"> 
+    <p>31. Biotic nature example:</p>
+    <p class="answer">✔️ Answer: Veins.</p>
+    <p class="description">Description: Veins are part of living organisms and represent biotic components of nature.</p>
+</div>
+
+<div class="question"> 
+    <p>32. Education and research are counted in:</p>
+    <p class="answer">✔️ Answer: d) direct, non-consumptive.</p>
+    <p class="description">Description: These are ecosystem services that do not involve physical consumption and are categorized under direct, non-consumptive uses.</p>
+</div>
+<div class="question">
+  <p>33. Plots as topographical units are used in:</p>
+  <p class="answer">✔️ Answer: Hills.</p>
+  <p class="description">Description: In hilly terrains, topographical units or plots are used for mapping and management because of the varying elevation and slope, which affect vegetation, drainage, and soil properties.</p>
+</div>
+<div class="question"> 
+  <p>34. Biological fixation is not done by:</p>
+  <p class="answer">✔️ Answer: Escherichia.</p>
+  <p class="description">Description: Escherichia (E. coli) is not involved in nitrogen fixation. It’s a common gut bacterium, unlike Anabaena and Rhizobium which are nitrogen-fixing.</p>
+</div>
+
+<div class="question"> 
+  <p>35. Which of the forest type is not found in India?</p>
+  <p class="answer">✔️ Answer: Mediterranean moist.</p>
+  <p class="description">Description: India doesn't have Mediterranean forests; even though "dry" wasn't an option, "moist" also isn't native here.</p>
+</div>
+
+<div class="question"> 
+  <p>36. Planting and the final felling between planned years are called as the </p>
+  <p class="answer">✔️ Answer: rotation period.</p>
+  <p class="description">Description: The rotation period is the planned number of years between the planting of a forest stand and its final cutting.</p>
+</div>
+
+<div class="question"> 
+  <p>37. Characteristic of climax community:</p>
+  <p class="answer">✔️ Answer: Well-formed spacial structure.</p>
+  <p class="description">Description: A climax community is relatively stable, self-perpetuating, and in equilibrium with the environment.</p>
+</div>
+
+<div class="question"> 
+  <p>38. Which of the following doesn’t perform biological fixation?</p>
+  <p class="answer">✔️ Answer: Escherichia.</p>
+  <p class="description">Description: Escherichia is not capable of nitrogen fixation, unlike Anabaena and Rhizobium which are.</p>
+</div>
+
+<div class="question"> 
+  <p>39. Which of these has the highest organic matter content?</p>
+  <p class="answer">✔️ Answer: Peaty soil.</p>
+  <p class="description">Description: Peaty soils are rich in organic material, often formed in waterlogged areas.</p>
+</div>
+
+<div class="question"> 
+  <p>40. Which of these is not a non-use value?</p>
+  <p class="answer">✔️ Answer: Direct value.</p>
+  <p class="description">Description: Direct value refers to actual use (like timber, food), while the rest are non-use values representing indirect or potential benefits.</p>
+</div>
+
+<div class="question"> 
+  <p>41. Which of these is an abiotic factor?</p>
+  <p class="answer">✔️ Answer: Water.</p>
+  <p class="description">Description: Abiotic factors are non-living elements of the environment. Water is abiotic, while vines, trees, and reptiles are biotic.</p>
+</div>
+
+
+
+    <div class="question" >
+        <p id="desc" >Based on previous year additional questions.</p>
+      </div>
+
+    <div class="back-link">
+      <a id="back" href="index.html">Go to Homepage</a>
+    </div>
+  </div>
+
+  <!-- Particle Background -->
+  <div id="tsparticles"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+  <script>
+    // Initialize particles background
+    tsParticles.load("tsparticles", {
+      fullScreen: { enable: false },
+      background: { color: "transparent" },
+      particles: {
+        number: { value: 60, density: { enable: true, area: 800 } },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        move: { enable: true, speed: 1, direction: "none", outModes: "bounce" },
+        links: { enable: true, distance: 100, color: "#ffffff", opacity: 0.2, width: 1 }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: "repulse" },
+          onClick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 100 },
+          push: { quantity: 4 }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

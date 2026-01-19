@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NPTEL Practice Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #3a0ca3, black);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .quiz-container {
+      width: 100%;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .question {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .answers label {
+      display: block;
+      font-size: 1.1rem;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 8px 0;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .answers input[type="radio"] {
+      display: none; /* Hide the default radio button */
+    }
+
+    .answers label:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    label.correct {
+      background-color: #4CAF50 !important;
+      color: white;
+    }
+
+    label.wrong {
+      background-color: #f44336 !important;
+      color: white;
+    }
+
+    label.disabled {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .navigation-btns {
+      display: flex;
+      justify-content: space-between; /* Space the buttons to the left and right */
+      margin-top: 20px;
+    }
+
+    .navigation-btns button {
+      padding: 10px 20px;
+      background: white;
+      color: black;
+      border: none;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .navigation-btns button:hover {
+      background-color: #ddd;
+    }
+
+    .score {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #00ffcc;
+    }
+
+    /* Background Particles Layer */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 0px;
+      font-size: 1rem;
+      color: #e0aaff;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      color: #f15bb5;
+    }
+    .logo {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #c77dff;
+      margin-bottom: 50px;
+      margin-left: 50px;
+    }
+
+  </style>
+</head>
+<body>
+    <div class="logo">QuizSphere</div>
+<div id="particles-js"></div>
+<h1>Forest And Their Management Quiz</h1>
+<h1>Extra Questions</h1><br>
+<div class="quiz-container">
+ 
+  <div class="question" id="question-text"></div>
+  <div class="answers" id="answer-options"></div>
+  <div class="navigation-btns">
+    <button id="prev-btn" onclick="previousQuestion()">Previous</button>
+    <button id="next-btn" onclick="nextQuestion()" style="display: none;">Next</button>
+    <button id="submit-btn" onclick="submitQuiz()" style="display: none;">Submit</button>
+  </div>
+  <div class="score" id="score-container"></div>
+  <a href="index.html" class="back-link">Back to Homepage</a><br>
+  <a href="practice.html" class="back-link">Back to Week Selection</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 80 },
+      size: { value: 2 },
+      color: { value: "#ffffff" },
+      line_linked: {
+        enable: true,
+        distance: 130,
+        color: "#ffffff",
+        opacity: 0.3,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: 1.5
+      }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: { enable: true, mode: "grab" }
+      }
+    }
+  });
+  const questions = [
+  {
+    question: "When are seed trees felled?",
+    answers: ["During thinning operations", "In the final or removal felling stage", "At the start of regeneration", "During crown thinning"],
+    correctAnswer: "In the final or removal felling stage"
+  },
+  {
+    question: "What is the branch of forestry dealing with harvesting, disposal, and use of forest produce?",
+    answers: ["Silviculture", "Forest Utilization", "Forest Management", "Forest Conservation"],
+    correctAnswer: "Forest Utilization"
+  },
+  {
+    question: "What are the aims of forest management?",
+    answers: ["Water reservation", "Soil preservation", "Species preservation", "All of the above"],
+    correctAnswer: "All of the above"
+  },
+  {
+    question: "When is a stand considered uneven-aged?",
+    answers: ["When trees are of different species", "When the age difference between trees is >20% of the desired rotation age", "When trees are planted in different years", "When growth rates vary significantly"],
+    correctAnswer: "When the age difference between trees is >20% of the desired rotation age"
+  },
+  {
+    question: "What is the value derived from knowing others are using the resource in this generation?",
+    answers: ["Option Value", "Bequest Value", "Altruistic Value", "Existence Value"],
+    correctAnswer: "Altruistic Value"
+  },
+  {
+    question: "What is the process of clearing old crops in a single felling called?",
+    answers: ["Selective cutting", "Clear Cutting", "Shelterwood cutting", "Coppicing"],
+    correctAnswer: "Clear Cutting"
+  },
+  {
+    question: "In even-aged stands, how much can tree ages vary?",
+    answers: ["Less than 20 years", "More than 30 years", "Between 25-40 years", "No variation allowed"],
+    correctAnswer: "Less than 20 years"
+  },
+  {
+    question: "According to plants, what kind of element is Chlorine?",
+    answers: ["Macronutrient", "Micronutrient", "Non-essential element", "Toxic element"],
+    correctAnswer: "Micronutrient"
+  },
+  {
+    question: "Number-diameter curve for selection is usually shaped as:",
+    answers: ["Bell-shaped", "Linear", "Inverse J-shaped", "S-shaped"],
+    correctAnswer: "Inverse J-shaped"
+  },
+  {
+    question: "Objectives of Forest Management include:",
+    answers: ["Economic benefits only", "Conservation only", "Recreation only", "All of the above"],
+    correctAnswer: "All of the above"
+  },
+  {
+    question: "Seed trees are removed during:",
+    answers: ["Initial felling", "Intermediate felling", "Final felling", "Preparatory felling"],
+    correctAnswer: "Final felling"
+  },
+  {
+    question: "Characteristics of climax vegetation include:",
+    answers: ["High species diversity", "Stable ecosystem", "Self-perpetuating", "All of the above"],
+    correctAnswer: "All of the above"
+  },
+  {
+    question: "Chestnut grows in what type of forest?",
+    answers: ["Wet and evergreen", "Dry and deciduous", "Swampy", "Coniferous"],
+    correctAnswer: "Dry and deciduous"
+  },
+  {
+    question: "Who proposed the grouping system for forest types?",
+    answers: ["Karl Gayer", "Champion", "Seth", "Brandis"],
+    correctAnswer: "Karl Gayer"
+  },
+  {
+    question: "A pine tree produces fruits for animals — this species is:",
+    answers: ["Indicator species", "Keystone species", "Flagship species", "Umbrella species"],
+    correctAnswer: "Keystone species"
+  },
+  {
+    question: "Mangrove trees are found in which type of forest?",
+    answers: ["Montane forest", "Swampy forest", "Desert forest", "Savanna"],
+    correctAnswer: "Swampy forest"
+  },
+  {
+    question: "Soil quality and formation depends upon what conditions?",
+    answers: ["Climate only", "Parent material only", "Climate, parent material, topography, biological activity, and time", "Human intervention only"],
+    correctAnswer: "Climate, parent material, topography, biological activity, and time"
+  },
+  {
+    question: "Chestnut species belong to which forest type?",
+    answers: ["Tropical rainforest", "Boreal forest", "Temperate deciduous forest", "Savanna"],
+    correctAnswer: "Temperate deciduous forest"
+  },
+  {
+    question: "Which tree does not perform biological nitrogen fixation?",
+    answers: ["Acacia", "Alnus", "Chestnut", "Leucaena"],
+    correctAnswer: "Chestnut"
+  },
+  {
+    question: "What is the standard breast height (DBH) used for tree measurement in Tokyo, Korea, and globally?",
+    answers: ["1.0 meters", "1.2 meters", "1.3 meters", "1.5 meters"],
+    correctAnswer: "1.3 meters"
+  },
+  {
+    question: "Firewood is considered as:",
+    answers: ["Indirect and non-consumptive use", "Direct and consumptive use", "Indirect and consumptive use", "Direct and non-consumptive use"],
+    correctAnswer: "Direct and consumptive use"
+  },
+  {
+    question: "Who introduced the group selection system in forestry?",
+    answers: ["Karl Gayer", "Dietrich Brandis", "H.G. Champion", "Gifford Pinchot"],
+    correctAnswer: "Karl Gayer"
+  },
+  {
+    question: "What is the rotation period for PB-II category forests?",
+    answers: ["30-45 years", "45-60 years", "60-90 years", "90-120 years"],
+    correctAnswer: "60-90 years"
+  },
+  {
+    question: "In uneven-aged forests, what should be the maximum percentage of trees in each age class?",
+    answers: ["Less than 20%", "Between 20-30%", "Between 30-40%", "More than 40%"],
+    correctAnswer: "Less than 20%"
+  },
+  {
+    question: "The 'inverse J' diameter distribution curve is used in which forest type?",
+    answers: ["Even-aged forest", "Uneven-aged forest", "Plantation forest", "Monoculture forest"],
+    correctAnswer: "Uneven-aged forest"
+  },
+  {
+    question: "What type of ecosystem is most likely to have a high rate of nitrogen fixation?",
+    answers: ["Desert ecosystem", "Tundra", "Tropical Rainforests", "Temperate grasslands"],
+    correctAnswer: "Tropical Rainforests"
+  },
+  {
+    question: "Tending is done on?",
+    answers: ["Crop only", "Competing vegetation only", "Crop and other competing vegetation", "Neither crop nor competing vegetation"],
+    correctAnswer: "Crop and other competing vegetation"
+  },
+  {
+    question: "Catchment areas are best suited for:",
+    answers: ["Clear-cutting system", "Coppice system", "Selection system", "Monoculture system"],
+    correctAnswer: "Selection system"
+  },
+  {
+    question: "Choice of spacing is dependent upon:",
+    answers: ["Objective of plantation only", "Site-specific matching only", "Growth rate only", "All of these (Objective of plantation, Site-specific matching, Growth rate)"],
+    correctAnswer: "All of these (Objective of plantation, Site-specific matching, Growth rate)"
+  },
+  {
+    question: "The fig tree would be a good example of:",
+    answers: ["Indicator species", "Keystone species", "Endangered species", "Invasive species"],
+    correctAnswer: "Keystone species"
+  },
+  {
+    question: "Biotic nature example:",
+    answers: ["Rocks", "Air", "Veins", "Water"],
+    correctAnswer: "Veins"
+  },
+  {
+    question: "Education and research are counted in:",
+    answers: ["Indirect, consumptive", "Indirect, non-consumptive", "Direct, consumptive", "Direct, non-consumptive"],
+    correctAnswer: "Direct, non-consumptive"
+  },
+  {
+    question: "Plots as topographical units are used in:",
+    answers: ["Plains", "Deserts", "Hills", "Wetlands"],
+    correctAnswer: "Hills"
+  },
+  {
+    question: "Biological fixation is not done by:",
+    answers: ["Rhizobium", "Anabaena", "Escherichia", "Azotobacter"],
+    correctAnswer: "Escherichia"
+  },
+  {
+    question: "Which of the forest type is not found in India?",
+    answers: ["Tropical dry", "Montane wet", "Mediterranean moist", "Mangrove"],
+    correctAnswer: "Mediterranean moist"
+  },
+  {
+    question: "Planting and the final felling between planned years are called as the:",
+    answers: ["Regeneration period", "Rotation period", "Felling cycle", "Silvicultural period"],
+    correctAnswer: "Rotation period"
+  },
+  {
+    question: "Characteristic of climax community:",
+    answers: ["High species turnover", "Unstable ecosystem", "Well-formed spatial structure", "Low biodiversity"],
+    correctAnswer: "Well-formed spatial structure"
+  },
+  {
+    question: "Which of the following doesn't perform biological fixation?",
+    answers: ["Rhizobium", "Anabaena", "Escherichia", "Azotobacter"],
+    correctAnswer: "Escherichia"
+  },
+  {
+    question: "Which of these has the highest organic matter content?",
+    answers: ["Sandy soil", "Clay soil", "Loamy soil", "Peaty soil"],
+    correctAnswer: "Peaty soil"
+  },
+  {
+    question: "Which of these is not a non-use value?",
+    answers: ["Option value", "Bequest value", "Existence value", "Direct value"],
+    correctAnswer: "Direct value"
+  },
+  {
+    question: "Which of these is an abiotic factor?",
+    answers: ["Trees", "Vines", "Reptiles", "Water"],
+    correctAnswer: "Water"
+  },
+  {
+    question: "Which of these is not a consumptive value?",
+    answers: ["Timber", "Firewood", "Non-timber forest products", "Education"],
+    correctAnswer: "Education"
+  }
+];
+  let currentQuestionIndex = 0;
+  const selectedAnswers = new Array(questions.length).fill(null);
+
+  // Helper function to get URL parameters
+  function getUrlParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+
+  // Get the randomization settings from URL
+  const randomizeQuestions = getUrlParameter('randomizeQuestions') === 'yes';
+  const randomizeAnswers = getUrlParameter('randomizeAnswers') === 'yes';
+
+  // Randomize questions if needed
+  if (randomizeQuestions) {
+    questions.sort(() => Math.random() - 0.5);
+  }
+
+  // Shuffle answers for each question if needed
+  function shuffleAnswers(answers) {
+    for (let i = answers.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [answers[i], answers[j]] = [answers[j], answers[i]]; // Swap elements
+    }
+  }
+
+  function loadQuestion() {
+    const question = questions[currentQuestionIndex];
+    const questionText = document.getElementById("question-text");
+    const answerOptions = document.getElementById("answer-options");
+
+    questionText.textContent = `${currentQuestionIndex + 1}. ${question.question}`;
+    answerOptions.innerHTML = "";
+
+    const shuffledAnswers = [...question.answers];
+    if (randomizeAnswers) {
+      shuffleAnswers(shuffledAnswers); // Shuffle answers if URL param is set
+    }
+
+    shuffledAnswers.forEach(answer => {
+      const label = document.createElement("label");
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "answer";
+      input.value = answer;
+
+      if (selectedAnswers[currentQuestionIndex] === answer) {
+        input.checked = true;
+      }
+
+      input.addEventListener("change", () => {
+        selectedAnswers[currentQuestionIndex] = answer;
+
+        const labels = document.querySelectorAll("#answer-options label");
+        labels.forEach(lbl => {
+          lbl.classList.remove("correct", "wrong", "disabled");
+          const inp = lbl.querySelector("input");
+          if (inp.value === question.correctAnswer) {
+            lbl.classList.add("correct");
+          } else if (inp.checked) {
+            lbl.classList.add("wrong");
+          }
+          lbl.classList.add("disabled");
+          inp.disabled = true;
+        });
+
+        // If it's the last question, show the submit button
+        if (currentQuestionIndex === questions.length - 1) {
+          document.getElementById("submit-btn").style.display = "inline-block";
+        } else {
+          // Move to next question after a 0.3 second delay
+          setTimeout(() => {
+            nextQuestion();
+          }, 800);
+        }
+      });
+
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(" " + answer));
+      answerOptions.appendChild(label);
+    });
+
+    document.getElementById("prev-btn").style.display = currentQuestionIndex === 0 ? "none" : "inline-block";
+    document.getElementById("next-btn").style.display = currentQuestionIndex === questions.length - 1 ? "none" : "inline-block";
+  }
+
+  function nextQuestion() {
+    if (currentQuestionIndex < questions.length - 1) {
+      currentQuestionIndex++;
+      loadQuestion();
+    }
+  }
+
+  function previousQuestion() {
+    if (currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      loadQuestion();
+    }
+  }
+
+  function submitQuiz() {
+  let score = 0;
+  const totalQuestions = questions.length;
+
+  questions.forEach((q, i) => {
+    if (selectedAnswers[i] === q.correctAnswer) score++;
+  });
+
+  window.location.href = `score.html?score=${score}&totalQuestions=${totalQuestions}`;
+}
+
+  loadQuestion();
+</script>
+</body>
+</html>

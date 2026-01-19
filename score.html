@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Results</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #3a0ca3, black);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      padding: 20px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .result-container {
+      width: 100%;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      position: relative;
+      z-index: 2;
+      animation: scaleIn 0.6s ease-in-out;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      animation: slideUp 0.7s ease-out;
+    }
+
+    .result {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .score {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #00ffcc;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.8);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 30px;
+      font-size: 1rem;
+      color: #e0aaff;
+      text-decoration: none;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .back-link:hover {
+      color: #f15bb5;
+    }
+
+    .navigation-btns {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      gap: 20px;
+      animation: fadeInUp 2s ease-in-out;
+    }
+
+    .navigation-btns button {
+      padding: 10px 20px;
+      background: linear-gradient(45deg, #7209b7, #560bad);
+      color: white;
+      border: none;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .navigation-btns button:hover {
+      background: #9d4edd;
+      transform: scale(1.05);
+    }
+
+    .logo {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #c77dff;
+      margin-bottom: 50px;
+      margin-left: 50px;
+    }
+
+    #tsparticles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">QuizSphere</div>
+
+  <div class="result-container">
+    <h1>Quiz Results</h1>
+    <div class="result">
+      <p class="score">Score: <span id="score"></span></p>
+      <p>Total Questions: <span id="total-questions"></span></p>
+      <p id="feedback-message">Loading feedback...</p>
+    </div>
+    <div class="navigation-btns">
+      <button onclick="goToHomepage()">Go to Homepage</button>
+      <button onclick="goToPractice()">Go to Week selection</button>
+    </div>
+  </div>
+
+  <!-- Particle Background -->
+  <div id="tsparticles"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+  <script>
+    // Initialize particles background
+    tsParticles.load("tsparticles", {
+      fullScreen: { enable: false },
+      background: { color: "transparent" },
+      particles: {
+        number: { value: 60, density: { enable: true, area: 800 } },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        move: { enable: true, speed: 1, direction: "none", outModes: "bounce" },
+        links: { enable: true, distance: 100, color: "#ffffff", opacity: 0.2, width: 1 }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: "repulse" },
+          onClick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 100 },
+          push: { quantity: 4 }
+        }
+      }
+    });
+
+    // Function to get query parameter value from the URL
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Retrieve query parameters
+    const score = parseInt(getQueryParam('score')) || 0;
+    const totalQuestions = parseInt(getQueryParam('totalQuestions')) || 0;
+
+    // Display the score and total questions
+    document.getElementById('score').textContent = score;
+    document.getElementById('total-questions').textContent = totalQuestions;
+
+    // Calculate percentage
+    const percentage = totalQuestions > 0 ? (score / totalQuestions) * 100 : 0;
+    const feedbackEl = document.getElementById("feedback-message");
+
+    // Set dynamic feedback message
+    let message = "Keep Rocking 🎉";
+    if (percentage >= 90) {
+      message = "Excellent! You're a star 🌟";
+    } else if (percentage >= 75) {
+      message = "Great job! Keep it up 💪";
+    } else if (percentage >= 60) {
+      message = "Not bad, but you’ve got this!";
+    } else if (percentage >= 40) {
+      message = "Almost there, keep practicing!";
+    } else if (percentage > 0) {
+      message = "Oops! Better luck next time.";
+    } else {
+      message = "Don't give up!";
+    }
+
+    feedbackEl.textContent = message;
+
+    // Navigation functions
+    function goToHomepage() {
+      window.location.href = "index.html";
+    }
+
+    function goToPractice() {
+      window.location.href = "practice.html";
+    }
+  </script>
+
+</body>
+</html>

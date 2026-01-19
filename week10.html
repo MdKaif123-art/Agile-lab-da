@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NPTEL Practice Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #3a0ca3, black);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .quiz-container {
+      width: 100%;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .question {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .answers label {
+      display: block;
+      font-size: 1.1rem;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 8px 0;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .answers input[type="radio"] {
+      display: none; /* Hide the default radio button */
+    }
+
+    .answers label:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    label.correct {
+      background-color: #4CAF50 !important;
+      color: white;
+    }
+
+    label.wrong {
+      background-color: #f44336 !important;
+      color: white;
+    }
+
+    label.disabled {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .navigation-btns {
+      display: flex;
+      justify-content: space-between; /* Space the buttons to the left and right */
+      margin-top: 20px;
+    }
+
+    .navigation-btns button {
+      padding: 10px 20px;
+      background: white;
+      color: black;
+      border: none;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .navigation-btns button:hover {
+      background-color: #ddd;
+    }
+
+    .score {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #00ffcc;
+    }
+
+    /* Background Particles Layer */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 0px;
+      font-size: 1rem;
+      color: #e0aaff;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      color: #f15bb5;
+    }
+    .logo {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #c77dff;
+      margin-bottom: 50px;
+      margin-left: 50px;
+    }
+
+  </style>
+</head>
+<body>
+    <div class="logo">QuizSphere</div>
+<div id="particles-js"></div>
+<h1>Forest And Their Management Quiz</h1>
+<h1>Week-10</h1><br>
+<div class="quiz-container">
+ 
+  <div class="question" id="question-text"></div>
+  <div class="answers" id="answer-options"></div>
+  <div class="navigation-btns">
+    <button id="prev-btn" onclick="previousQuestion()">Previous</button>
+    <button id="next-btn" onclick="nextQuestion()" style="display: none;">Next</button>
+    <button id="submit-btn" onclick="submitQuiz()" style="display: none;">Submit</button>
+  </div>
+  <div class="score" id="score-container"></div>
+  <a href="index.html" class="back-link">Back to Homepage</a><br>
+  <a href="practice.html" class="back-link">Back to Week Selection</a></div>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 80 },
+      size: { value: 2 },
+      color: { value: "#ffffff" },
+      line_linked: {
+        enable: true,
+        distance: 130,
+        color: "#ffffff",
+        opacity: 0.3,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: 1.5
+      }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: { enable: true, mode: "grab" }
+      }
+    }
+  });
+
+  const questions = [
+  {
+    question: "Wet and dry treatment of seeds is used for which species",
+    answers: ["amla", "mango", "ber", "teak"],
+    correctAnswer: "teak"
+  },
+  {
+    question: "Which of these is not a laboratory method to determine best days for seed collection?",
+    answers: ["maximum dry weight", "colour of fruits", "moisture content of fruits", "chemical analysis of fat and nitrogen content"],
+    correctAnswer: "colour of fruits"
+  },
+  {
+    question: "Which of these characterizes a refractory site",
+    answers: ["soil depth < 10 cm", "soil depth 10-30 cm", "soil depth > 30 cm", "none of these"],
+    correctAnswer: "soil depth < 10 cm"
+  },
+  {
+    question: "Which of these prevents water logging",
+    answers: ["sunken bed", "raised bed", "flat bed", "all of these"],
+    correctAnswer: "raised bed"
+  },
+  {
+    question: "Number of seeds in sample that germinate upto the peak germination period expressed as % is a definition of",
+    answers: ["germination number", "germination percentage", "germination energy", "germination power"],
+    correctAnswer: "germination energy"
+  },
+  {
+    question: "Which of these conserves moisture",
+    answers: ["sunken bed", "raised bed", "flat bed", "all of these"],
+    correctAnswer: "sunken bed"
+  },
+  {
+    question: "Agave is used for",
+    answers: ["barbed wire fencing", "live fencing", "chain link fencing", "stone wall fencing"],
+    correctAnswer: "live fencing"
+  },
+  {
+    question: "Shell cracking of seeds is used for which species",
+    answers: ["amla", "mango", "ber", "teak"],
+    correctAnswer: "ber"
+  },
+  {
+    question: "Choice of spacing is dependent upon",
+    answers: ["objective of plantation", "site-species matching", "growth rate", "all of these"],
+    correctAnswer: "all of these"
+  },
+  {
+    question: "Which of these is a good storage condition",
+    answers: ["high moisture, high temperature", "high moisture, low temperature", "low moisture, high temperature", "low moisture, low temperature"],
+    correctAnswer: "low moisture, low temperature"
+  }
+];
+
+
+  let currentQuestionIndex = 0;
+  const selectedAnswers = new Array(questions.length).fill(null);
+
+  // Helper function to get URL parameters
+  function getUrlParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+
+  // Get the randomization settings from URL
+  const randomizeQuestions = getUrlParameter('randomizeQuestions') === 'yes';
+  const randomizeAnswers = getUrlParameter('randomizeAnswers') === 'yes';
+
+  // Randomize questions if needed
+  if (randomizeQuestions) {
+    questions.sort(() => Math.random() - 0.5);
+  }
+
+  // Shuffle answers for each question if needed
+  function shuffleAnswers(answers) {
+    for (let i = answers.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [answers[i], answers[j]] = [answers[j], answers[i]]; // Swap elements
+    }
+  }
+
+  function loadQuestion() {
+    const question = questions[currentQuestionIndex];
+    const questionText = document.getElementById("question-text");
+    const answerOptions = document.getElementById("answer-options");
+
+    questionText.textContent = `${currentQuestionIndex + 1}. ${question.question}`;
+    answerOptions.innerHTML = "";
+
+    const shuffledAnswers = [...question.answers];
+    if (randomizeAnswers) {
+      shuffleAnswers(shuffledAnswers); // Shuffle answers if URL param is set
+    }
+
+    shuffledAnswers.forEach(answer => {
+      const label = document.createElement("label");
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "answer";
+      input.value = answer;
+
+      if (selectedAnswers[currentQuestionIndex] === answer) {
+        input.checked = true;
+      }
+
+      input.addEventListener("change", () => {
+        selectedAnswers[currentQuestionIndex] = answer;
+
+        const labels = document.querySelectorAll("#answer-options label");
+        labels.forEach(lbl => {
+          lbl.classList.remove("correct", "wrong", "disabled");
+          const inp = lbl.querySelector("input");
+          if (inp.value === question.correctAnswer) {
+            lbl.classList.add("correct");
+          } else if (inp.checked) {
+            lbl.classList.add("wrong");
+          }
+          lbl.classList.add("disabled");
+          inp.disabled = true;
+        });
+
+        // If it's the last question, show the submit button
+        if (currentQuestionIndex === questions.length - 1) {
+          document.getElementById("submit-btn").style.display = "inline-block";
+        } else {
+          // Move to next question after a 0.3 second delay
+          setTimeout(() => {
+            nextQuestion();
+          }, 800);
+        }
+      });
+
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(" " + answer));
+      answerOptions.appendChild(label);
+    });
+
+    document.getElementById("prev-btn").style.display = currentQuestionIndex === 0 ? "none" : "inline-block";
+    document.getElementById("next-btn").style.display = currentQuestionIndex === questions.length - 1 ? "none" : "inline-block";
+  }
+
+  function nextQuestion() {
+    if (currentQuestionIndex < questions.length - 1) {
+      currentQuestionIndex++;
+      loadQuestion();
+    }
+  }
+
+  function previousQuestion() {
+    if (currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      loadQuestion();
+    }
+  }
+
+  function submitQuiz() {
+  let score = 0;
+  const totalQuestions = questions.length;
+
+  questions.forEach((q, i) => {
+    if (selectedAnswers[i] === q.correctAnswer) score++;
+  });
+
+  window.location.href = `score.html?score=${score}&totalQuestions=${totalQuestions}`;
+}
+
+  loadQuestion();
+</script>
+</body>
+</html>
